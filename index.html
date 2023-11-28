@@ -29,5 +29,24 @@
   </form>
   
   <script src="script.js"></script>
+  <script>
+    // フォーム送信時のデータ保存
+    document.getElementById('playRecordForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const songTitle = document.getElementById('songTitle').value;
+      const difficulty = document.getElementById('difficulty').value;
+      const score = document.getElementById('score').value;
+      const misses = document.getElementById('misses').value;
+      
+      // データをローカルストレージに保存
+      localStorage.setItem('songTitle', songTitle);
+      localStorage.setItem('difficulty', difficulty);
+      localStorage.setItem('score', score);
+      localStorage.setItem('misses', misses);
+      
+      alert('データを保存しました');
+    });
+  </script>
 </body>
 </html>
