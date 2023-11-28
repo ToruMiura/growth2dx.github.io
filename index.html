@@ -7,6 +7,15 @@
 <body>
   <h1>Beatmania IIDX Play記録アプリ</h1>
   
+  <!-- データを表示するための要素 -->
+  <div id="savedData">
+    <h2>保存されたデータ</h2>
+    <p>曲名: <span id="savedSongTitle"></span></p>
+    <p>難易度: <span id="savedDifficulty"></span></p>
+    <p>スコア: <span id="savedScore"></span></p>
+    <p>ミス数: <span id="savedMisses"></span></p>
+  </div>
+  
   <form id="playRecordForm">
     <label for="songTitle">曲名:</label>
     <input type="text" id="songTitle" name="songTitle"><br><br>
@@ -30,6 +39,12 @@
   
   <script src="script.js"></script>
   <script>
+    // ローカルストレージからデータを取得して表示する
+    document.getElementById('savedSongTitle').textContent = localStorage.getItem('songTitle') || 'データなし';
+    document.getElementById('savedDifficulty').textContent = localStorage.getItem('difficulty') || 'データなし';
+    document.getElementById('savedScore').textContent = localStorage.getItem('score') || 'データなし';
+    document.getElementById('savedMisses').textContent = localStorage.getItem('misses') || 'データなし';
+    
     // フォーム送信時のデータ保存
     document.getElementById('playRecordForm').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -46,6 +61,12 @@
       localStorage.setItem('misses', misses);
       
       alert('データを保存しました');
+      
+      // 保存後、保存されたデータを再表示する
+      document.getElementById('savedSongTitle').textContent = songTitle;
+      document.getElementById('savedDifficulty').textContent = difficulty;
+      document.getElementById('savedScore').textContent = score;
+      document.getElementById('savedMisses').textContent = misses;
     });
   </script>
 </body>
