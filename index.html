@@ -14,7 +14,7 @@
 </head>
 <body>
   <h1>プレイ記録を追加</h1>
-  <form id="playRecordForm">
+  <form id="playRecordForm" onsubmit="addRecord(); return false;">
     <label>難易度：</label><br>
     <!-- 難易度のラジオボタン（横並び） -->
     <input type="radio" id="diff8" name="difficulty" value="8">
@@ -97,5 +97,53 @@
 
     <button type="submit">記録を追加</button>
   </form>
+  <h2>直近10回分の記録</h2>
+  <table id="recentRecords">
+    <thead>
+      <tr>
+        <th>回数</th>
+        <th>難易度</th>
+        <th>クリア種別</th>
+        <th>クリアランク</th>
+        <th>ミス数</th>
+        <th>スクラッチ曲</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ここにJavaScriptで動的に記録が追加されます -->
+    </tbody>
+  </table>
+
+  <script>
+    let recordCounter = 1;
+
+    function addRecord() {
+      // フォームから値を取得
+      const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+      const clearType = document.querySelector('input[name="clearType"]:checked').value;
+      const clearRank = document.querySelector('input[name="clearRank"]:checked').value;
+      const missCount = document.getElementById('missCount').value;
+      const scratchSong = document.getElementById('scratchSong').checked ? "Yes" : "No";
+
+      // テーブルに新しい行を追加
+      const table = document.getElementById('recentRecords').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+      newRow.insertCell(0).appendChild(document.createTextNode(recordCounter));
+      newRow.insertCell(1).appendChild(document.createTextNode(difficulty));
+      newRow.insertCell(2).appendChild(document.createTextNode(clearType));
+      newRow.insertCell(3).appendChild(document.createTextNode(clearRank));
+      newRow.insertCell(4).appendChild(document.createTextNode(missCount));
+      newRow.insertCell(5).appendChild(document.createTextNode(scratchSong));
+
+      // フォームの値をリセット
+      document.getElementById('playRecordForm').reset();
+
+      // 表示回数を更新
+      recordCounter++;
+      if (recordCounter > 10) {
+        recordCounter = 1;
+      }
+    }
+  </script>
 </body>
 </html>
