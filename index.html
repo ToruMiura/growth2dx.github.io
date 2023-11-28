@@ -4,25 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>プレイ記録アプリ</title>
+  <style>
+   /* ラジオボタンを横並びにするためのスタイル */
+   input[type="radio"] {
+     display: inline-block;
+     margin-right: 3px; /* ラジオボタン間の余白 */
+   }
+ </style>
 </head>
 <body>
   <h1>プレイ記録を追加</h1>
   <form id="playRecordForm">
     <label>難易度：</label><br>
+    <!-- 難易度のラジオボタン（横並び） -->
     <input type="radio" id="diff8" name="difficulty" value="8">
-    <label for="diff8">8</label><br>
+    <label for="diff8">8</label>
 
     <input type="radio" id="diff9" name="difficulty" value="9">
-    <label for="diff9">9</label><br>
+    <label for="diff9">9</label>
 
     <input type="radio" id="diff10" name="difficulty" value="10">
-    <label for="diff10">10</label><br>
+    <label for="diff10">10</label>
 
     <input type="radio" id="diff11" name="difficulty" value="11">
-    <label for="diff11">11</label><br>
+    <label for="diff11">11</label>
 
     <input type="radio" id="diff12" name="difficulty" value="12">
-    <label for="diff12">12</label><br><br>
+    <label for="diff12">12</label>
+    <br>
+    <br>
+
+    <label>クリア種別：</label><br>
+    <!-- クリア種別のラジオボタン（横並び） -->
+    <input type="radio" id="typeF" name="clearType" value="F">
+    <label for="typeF">F</label>
+
+    <input type="radio" id="typeAE" name="clearType" value="AE">
+    <label for="typeAE">AE</label>
+
+    <input type="radio" id="typeE" name="clearType" value="E">
+    <label for="typeE">E</label>
+
+    <input type="radio" id="typeC" name="clearType" value="C">
+    <label for="typeC">C</label>
+
+    <input type="radio" id="typeH" name="clearType" value="H">
+    <label for="typeH">H</label>
+
+    <input type="radio" id="typeEH" name="clearType" value="EH">
+    <label for="typeEH">EH</label>
+    <br>
+    <br>
+    
+    <label>クリアランク：</label><br>
+    <!-- クリアランクのラジオボタン（横並び） -->
+    <input type="radio" id="rankC" name="clearRank" value="C">
+    <label for="rankC">C</label>
+
+    <input type="radio" id="rankB" name="clearRank" value="B">
+    <label for="rankB">B</label>
+
+    <input type="radio" id="rankBplus" name="clearRank" value="B+">
+    <label for="rankBplus">B+</label>
+
+    <input type="radio" id="rankA" name="clearRank" value="A">
+    <label for="rankA">A</label>
+
+    <input type="radio" id="rankAplus" name="clearRank" value="A+">
+    <label for="rankAplus">A+</label>
+    <br>
+
+    <input type="radio" id="rankAA" name="clearRank" value="AA">
+    <label for="rankAA">AA</label>
+
+    <input type="radio" id="rankAAplus" name="clearRank" value="AA+">
+    <label for="rankAAplus">AA+</label>
+
+    <input type="radio" id="rankAAA" name="clearRank" value="AAA">
+    <label for="rankAAA">AAA</label>
+    <br>
+    <br>
+
+    <!-- ミスカウント -->
+    <label for="missCount">ミス数：</label>
+    <input type="text" id="missCount" name="missCount"><br><br>
+
+    <!-- 皿曲の確認 -->
+    <label for="scratchSong">スクラッチ曲：</label>
+    <input type="checkbox" id="scratchSong" name="scratchSong" value="true"><br><br>
 
     <!-- 他の記録項目の入力フォーム -->
 
