@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beatmania IIDX Play記録アプリ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Beatmania IIDX Play記録アプリ</h1>
+  
+  <form id="playRecordForm">
+    <label for="songTitle">曲名:</label>
+    <input type="text" id="songTitle" name="songTitle"><br><br>
+    
+    <label for="difficulty">難易度:</label>
+    <select id="difficulty" name="difficulty">
+      <option value="Beginner">Beginner</option>
+      <option value="Normal">Normal</option>
+      <option value="Hyper">Hyper</option>
+      <option value="Another">Another</option>
+    </select><br><br>
+    
+    <label for="score">スコア:</label>
+    <input type="number" id="score" name="score"><br><br>
+    
+    <label for="misses">ミス数:</label>
+    <input type="number" id="misses" name="misses"><br><br>
+    
+    <input type="submit" value="記録する">
+  </form>
+  
+  <script src="script.js"></script>
+</body>
+</html>
