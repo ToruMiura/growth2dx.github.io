@@ -1,73 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <title>Beatmania IIDX Play記録アプリ</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プレイ記録アプリ</title>
 </head>
 <body>
-  <h1>Beatmania IIDX Play記録アプリ</h1>
-  
-  <!-- データを表示するための要素 -->
-  <div id="savedData">
-    <h2>保存されたデータ</h2>
-    <p>曲名: <span id="savedSongTitle"></span></p>
-    <p>難易度: <span id="savedDifficulty"></span></p>
-    <p>スコア: <span id="savedScore"></span></p>
-    <p>ミス数: <span id="savedMisses"></span></p>
-  </div>
-  
+  <h1>プレイ記録を追加</h1>
   <form id="playRecordForm">
-    <label for="songTitle">曲名:</label>
-    <input type="text" id="songTitle" name="songTitle"><br><br>
-    
-    <label for="difficulty">難易度:</label>
-    <select id="difficulty" name="difficulty">
-      <option value="Beginner">Beginner</option>
-      <option value="Normal">Normal</option>
-      <option value="Hyper">Hyper</option>
-      <option value="Another">Another</option>
-    </select><br><br>
-    
-    <label for="score">スコア:</label>
-    <input type="number" id="score" name="score"><br><br>
-    
-    <label for="misses">ミス数:</label>
-    <input type="number" id="misses" name="misses"><br><br>
-    
-    <input type="submit" value="記録する">
+    <label>難易度：</label><br>
+    <input type="radio" id="diff8" name="difficulty" value="8">
+    <label for="diff8">8</label><br>
+
+    <input type="radio" id="diff9" name="difficulty" value="9">
+    <label for="diff9">9</label><br>
+
+    <input type="radio" id="diff10" name="difficulty" value="10">
+    <label for="diff10">10</label><br>
+
+    <input type="radio" id="diff11" name="difficulty" value="11">
+    <label for="diff11">11</label><br>
+
+    <input type="radio" id="diff12" name="difficulty" value="12">
+    <label for="diff12">12</label><br><br>
+
+    <!-- 他の記録項目の入力フォーム -->
+
+    <button type="submit">記録を追加</button>
   </form>
-  
-  <script src="script.js"></script>
-  <script>
-    // ローカルストレージからデータを取得して表示する
-    document.getElementById('savedSongTitle').textContent = localStorage.getItem('songTitle') || 'データなし';
-    document.getElementById('savedDifficulty').textContent = localStorage.getItem('difficulty') || 'データなし';
-    document.getElementById('savedScore').textContent = localStorage.getItem('score') || 'データなし';
-    document.getElementById('savedMisses').textContent = localStorage.getItem('misses') || 'データなし';
-    
-    // フォーム送信時のデータ保存
-    document.getElementById('playRecordForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      const songTitle = document.getElementById('songTitle').value;
-      const difficulty = document.getElementById('difficulty').value;
-      const score = document.getElementById('score').value;
-      const misses = document.getElementById('misses').value;
-      
-      // データをローカルストレージに保存
-      localStorage.setItem('songTitle', songTitle);
-      localStorage.setItem('difficulty', difficulty);
-      localStorage.setItem('score', score);
-      localStorage.setItem('misses', misses);
-      
-      alert('データを保存しました');
-      
-      // 保存後、保存されたデータを再表示する
-      document.getElementById('savedSongTitle').textContent = songTitle;
-      document.getElementById('savedDifficulty').textContent = difficulty;
-      document.getElementById('savedScore').textContent = score;
-      document.getElementById('savedMisses').textContent = misses;
-    });
-  </script>
 </body>
 </html>
