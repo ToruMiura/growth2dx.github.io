@@ -103,10 +103,10 @@
 
     <!-- ミスカウント -->
     <label for="missCount">ミス数: <span id="missCountValue">0</span></label>
-    <div style="display: flex; align-items: center; margin-top: 10px;">
-      <button type="button" onclick="changeMissCount(-1)">−1</button>
-      <input type="range" id="missCount" name="missCount" min="0" max="200" value="0" style="margin-left: 20px; margin-right: 20px; flex-grow: 1;" oninput="updateMissCountValue(this.value);">
-      <button type="button" onclick="changeMissCount(1)">+1</button>
+    <div style="display: flex; align-items: center; margin-top: 10px; gap: 10px;">
+      <button type="button" onclick="changeMissCount(-1)" style="margin-right: 10px;">−1</button>
+      <input type="range" id="missCount" name="missCount" min="0" max="500" value="0" style="flex-grow: 1;" oninput="updateMissCountValue(this.value);">
+      <button type="button" onclick="changeMissCount(1)" style="margin-left: 10px;">+1</button>
     </div>
     <br><br>
 
