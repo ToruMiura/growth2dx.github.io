@@ -26,27 +26,30 @@
    #recentRecords th {
      background-color: #f2f2f2; /* ヘッダーの背景色 */
    } 
+   .difficulty-table td {
+     cursor: pointer;
+     border: 1px solid #000;
+     text-align: center;
+   }
+   .selected {
+     background-color: #f2f2f2;
+   }
  </style>
 </head>
 <body>
   <h1>プレイ記録を追加</h1>
   <form id="playRecordForm" onsubmit="addRecord(); return false;">
     <label>難易度：</label><br>
-    <!-- 難易度のラジオボタン（横並び） -->
-    <input type="radio" id="diff8" name="difficulty" value="8">
-    <label for="diff8">8</label>
-
-    <input type="radio" id="diff9" name="difficulty" value="9">
-    <label for="diff9">9</label>
-
-    <input type="radio" id="diff10" name="difficulty" value="10">
-    <label for="diff10">10</label>
-
-    <input type="radio" id="diff11" name="difficulty" value="11">
-    <label for="diff11">11</label>
-
-    <input type="radio" id="diff12" name="difficulty" value="12">
-    <label for="diff12">12</label>
+    <table class="difficulty-table">
+      <tr>
+        <td onclick="selectDifficulty('8', this)">8</td>
+        <td onclick="selectDifficulty('9', this)">9</td>
+        <td onclick="selectDifficulty('10', this)">10</td>
+        <td onclick="selectDifficulty('11', this)">11</td>
+        <td onclick="selectDifficulty('12', this)">12</td>
+      </tr>
+    </table>
+    <input type="hidden" id="selectedDifficulty" name="difficulty">
     <br>
     <br>
 
@@ -138,6 +141,18 @@
   <script>
     let recordCounter = 1;
 
+    function selectDifficulty(difficulty, element) {
+      // 既存の選択をクリア
+      const cells = document.querySelectorAll('.difficulty-table td');
+      cells.forEach(cell => cell.classList.remove('selected'));
+      
+      // 新しい選択をハイライト
+      element.classList.add('selected');
+      
+      // 選択された難易度をinputに設定
+      document.getElementById('selectedDifficulty').value = difficulty;
+    }
+    
     function updateMissCountValue(value) {
     document.getElementById("missCountValue").textContent = value;
     document.getElementById("missCountSlider").value = value;
