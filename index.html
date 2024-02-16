@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プレイ記録アプリ</title>
-  <style>
-   /* ラジオボタンを横並びにするためのスタイル */
-   input[type="radio"] {
-     display: inline-block;
-     margin-right: 3px; /* ラジオボタン間の余白 */
-   }
-   /* 直近10回分の記録テーブルのスタイル */
-   #recentRecords {
-     border-collapse: collapse; /* セルの境界線を一つにまとめる */
-     width: 100%; /* テーブルの幅を親要素に合わせる */
-     margin-top: 20px; /* テーブルの上の余白 */
-   }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プレイ記録アプリ</title>
+    <style>
+        /* ラジオボタンを横並びにするためのスタイル */
+        input[type="radio"] {
+            display: inline-block;
+            margin-right: 3px; /* ラジオボタン間の余白 */
+        }
+        /* 直近10回分の記録テーブルのスタイル */
+        #recentRecords {
+            border-collapse: collapse; /* セルの境界線を一つにまとめる */
+            width: 100%; /* テーブルの幅を親要素に合わせる */
+            margin-top: 20px; /* テーブルの上の余白 */
+        }
 
-   #recentRecords th, #recentRecords td {
-     border: 1px solid #000; /* 黒の罫線 */
-     padding: 8px; /* セル内の余白 */
-     text-align: left; /* テキストを左揃えに */
-   }
+        #recentRecords th, #recentRecords td {
+            border: 1px solid #000; /* 黒の罫線 */
+            padding: 8px; /* セル内の余白 */
+            text-align: left; /* テキストを左揃えに */
+        }
 
-   #recentRecords th {
-     background-color: #f2f2f2; /* ヘッダーの背景色 */
-   } 
-        .difficulty-options {
+        #recentRecords th {
+            background-color: #dcdcdc; /* ヘッダーの背景色 */
+        }
+
+        .selection-options {
             display: flex; /* Flexboxを有効化 */
             justify-content: space-around; /* 内容物を均等に配置 */
             margin: 20px 50px; /* 上下のマージンと、両端から50pxのマージン */
+            gap: 5px; /* ボタン間のギャップ */
         }
 
-        .difficulty-options button {
+        .selection-options button {
             flex: 1; /* 各ボタンが利用可能なスペースを均等に埋める */
             cursor: pointer;
             margin: 0 5px; /* ボタン間のマージン */
@@ -42,169 +44,180 @@
         .selected {
             background-color: #87ceeb; /* 選択されたボタンの背景色 */
         }
- </style>
+    </style>
 </head>
 <body>
-  <h1>プレイ記録を追加</h1>
-  <form id="playRecordForm" onsubmit="addRecord(); return false;">
+    <h1>プレイ記録を追加</h1>
+    <form id="playRecordForm" onsubmit="addRecord(); return false;">
         <label>難易度：</label><br>
-        <div class="difficulty-options">
-            <button type="button" onclick="selectDifficulty('8')">8</button>
-            <button type="button" onclick="selectDifficulty('9')">9</button>
-            <button type="button" onclick="selectDifficulty('10')">10</button>
-            <button type="button" onclick="selectDifficulty('11')">11</button>
-            <button type="button" onclick="selectDifficulty('12')">12</button>
+        <div class="selection-options" id="difficultyOptions">
+            <button type="button" onclick="selectOption('difficulty', '8', event)">8</button>
+            <button type="button" onclick="selectOption('difficulty', '9', event)">9</button>
+            <button type="button" onclick="selectOption('difficulty', '10', event)">10</button>
+            <button type="button" onclick="selectOption('difficulty', '11', event)">11</button>
+            <button type="button" onclick="selectOption('difficulty', '12', event)">12</button>
         </div>
         <input type="hidden" id="selectedDifficulty" name="difficulty">
-    <br>
-    <br>
+        <br>
+        <br>
 
-    <label>クリア種別：</label><br>
-    <!-- クリア種別のラジオボタン（横並び） -->
-    <input type="radio" id="typeF" name="clearType" value="F">
-    <label for="typeF">F</label>
+        <label>クリア種別：</label><br>
+        <!-- クリア種別のラジオボタン（横並び） -->
+        <div class="selection-options" id="clearTypeOptions">
+            <button type="button" onclick="selectOption('clearType', 'F', event)">F</button>
+            <button type="button" onclick="selectOption('clearType', 'AE', event)">AE</button>
+            <button type="button" onclick="selectOption('clearType', 'E', event)">E</button>
+            <button type="button" onclick="selectOption('clearType', 'C', event)">C</button>
+            <button type="button" onclick="selectOption('clearType', 'H', event)">H</button>
+            <button type="button" onclick="selectOption('clearType', 'EH', event)">EH</button>
+        </div>
+        <input type="hidden" id="selectedClearType" name="clearType">
+        <br>
+        <br>
 
-    <input type="radio" id="typeAE" name="clearType" value="AE">
-    <label for="typeAE">AE</label>
+        <label>クリアランク：</label><br>
+        <!-- クリアランクのラジオボタン（横並び） -->
+        <div class="selection-options" id="clearRankOptions">
+            <button type="button" onclick="selectOption('clearRank', 'C', event)">C</button>
+            <button type="button" onclick="selectOption('clearRank', 'B', event)">B</button>
+            <button type="button" onclick="selectOption('clearRank', 'B+', event)">B+</button>
+            <button type="button" onclick="selectOption('clearRank', 'A', event)">A</button>
+            <button type="button" onclick="selectOption('clearRank', 'A+', event)">A+</button>
+            <button type="button" onclick="selectOption('clearRank', 'AA', event)">AA</button>
+            <button type="button" onclick="selectOption('clearRank', 'AA+', event)">AA+</button>
+            <button type="button" onclick="selectOption('clearRank', 'AAA', event)">AAA</button>
+        </div>
+        <input type="hidden" id="selectedClearRank" name="clearRank">
+        <br>
+        <br>
 
-    <input type="radio" id="typeE" name="clearType" value="E">
-    <label for="typeE">E</label>
+        <!-- ミスカウント -->
+        <label for="missCount">ミス数: <span id="missCountValue"> 0 </span></label>
+        <div style="display: flex; align-items: center; margin-top: 10px; gap: 40px;">
+            <button type="button" onclick="changeMissCount(-1)" style="margin-left: 20px;">−1</button>
+            <input type="range" id="missCount" name="missCount" min="0" max="200" value="0" style="flex-grow: 1;" oninput="updateMissCountValue(this.value);">
+            <button type="button" onclick="changeMissCount(1)" style="margin-right: 20px;">+1</button>
+        </div>
+        <br><br>
 
-    <input type="radio" id="typeC" name="clearType" value="C">
-    <label for="typeC">C</label>
+        <!-- 皿曲の確認 -->
+        <label for="scratchSong">スクラッチ曲：</label>
+        <input type="checkbox" id="scratchSong" name="scratchSong" value="true"><br><br>
 
-    <input type="radio" id="typeH" name="clearType" value="H">
-    <label for="typeH">H</label>
+        <!-- 他の記録項目の入力フォーム -->
 
-    <input type="radio" id="typeEH" name="clearType" value="EH">
-    <label for="typeEH">EH</label>
-    <br>
-    <br>
-    
-    <label>クリアランク：</label><br>
-    <!-- クリアランクのラジオボタン（横並び） -->
-    <input type="radio" id="rankC" name="clearRank" value="C">
-    <label for="rankC">C</label>
+        <button type="submit">記録を追加</button>
+    </form>
+    <h2>直近10回分の記録</h2>
+    <table id="recentRecords">
+        <thead>
+            <tr>
+                <th>回数</th>
+                <th>難易度</th>
+                <th>クリア種別</th>
+                <th>クリアランク</th>
+                <th>ミス数</th>
+                <th>スクラッチ曲</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ここにJavaScriptで動的に記録が追加されます -->
+        </tbody>
+    </table>
 
-    <input type="radio" id="rankB" name="clearRank" value="B">
-    <label for="rankB">B</label>
+    <script>
+        let recordCounter = 1;
 
-    <input type="radio" id="rankBplus" name="clearRank" value="B+">
-    <label for="rankBplus">B+</label>
+        function selectDifficulty(difficulty, event) {
+            // 既存の選択をクリア
+            document.querySelectorAll('.difficulty-options button').forEach(button => {
+                button.classList.remove('selected');
+            });
 
-    <input type="radio" id="rankA" name="clearRank" value="A">
-    <label for="rankA">A</label>
+            // 新しい選択をハイライト
+            event.currentTarget.classList.add('selected');
 
-    <input type="radio" id="rankAplus" name="clearRank" value="A+">
-    <label for="rankAplus">A+</label>
-    <br>
+            // 選択された難易度をinputに設定
+            document.getElementById('selectedDifficulty').value = difficulty;
+        }
 
-    <input type="radio" id="rankAA" name="clearRank" value="AA">
-    <label for="rankAA">AA</label>
+        function updateMissCountValue(value) {
+            document.getElementById("missCountValue").textContent = value;
+            document.getElementById("missCountSlider").value = value;
+        }
 
-    <input type="radio" id="rankAAplus" name="clearRank" value="AA+">
-    <label for="rankAAplus">AA+</label>
+        function changeMissCount(change) {
+            var slider = document.getElementById("missCount");
+            var currentValue = parseInt(slider.value);
+            var newValue = currentValue + change;
+            if (newValue >= 0 && newValue <= 200) {
+                slider.value = newValue;
+                updateMissCountValue(newValue);
+            }
+        }
 
-    <input type="radio" id="rankAAA" name="clearRank" value="AAA">
-    <label for="rankAAA">AAA</label>
-    <br>
-    <br>
+        function selectOption(type, value, event) {
+            // 既存の選択をクリア
+            document.querySelectorAll(`#${type}Options button`).forEach(button => {
+                button.classList.remove('selected');
+            });
 
-    <!-- ミスカウント -->
-    <label for="missCount">ミス数: <span id="missCountValue"> 0 </span></label>
-    <div style="display: flex; align-items: center; margin-top: 10px; gap: 40px;">
-      <button type="button" onclick="changeMissCount(-1)" style="margin-left: 20px;">−1</button>
-      <input type="range" id="missCount" name="missCount" min="0" max="200" value="0" style="flex-grow: 1;" oninput="updateMissCountValue(this.value);">
-      <button type="button" onclick="changeMissCount(1)" style="margin-right: 20px;">+1</button>
-    </div>
-    <br><br>
+            // 新しい選択をハイライト
+            event.currentTarget.classList.add('selected');
 
-    <!-- 皿曲の確認 -->
-    <label for="scratchSong">スクラッチ曲：</label>
-    <input type="checkbox" id="scratchSong" name="scratchSong" value="true"><br><br>
+            // 選択された値を対応する隠しinputに設定
+            document.getElementById(`selected${type.charAt(0).toUpperCase() + type.slice(1)}`).value = value;
+        }
 
-    <!-- 他の記録項目の入力フォーム -->
+        function addRecord() {
+            // フォームのデフォルト送信を防止
+            event.preventDefault();
 
-    <button type="submit">記録を追加</button>
-  </form>
-  <h2>直近10回分の記録</h2>
-  <table id="recentRecords">
-    <thead>
-      <tr>
-        <th>回数</th>
-        <th>難易度</th>
-        <th>クリア種別</th>
-        <th>クリアランク</th>
-        <th>ミス数</th>
-        <th>スクラッチ曲</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- ここにJavaScriptで動的に記録が追加されます -->
-    </tbody>
-  </table>
+            // フォームから値を取得
+            const form = document.getElementById('playRecordForm');
+            const difficulty = document.getElementById('selectedDifficulty').value;
+            const clearType = document.getElementById('selectedClearType').value;
+            const clearRank = document.getElementById('selectedClearRank').value;
+            const missCount = document.getElementById('missCount').value;
+            const scratchSong = document.getElementById('scratchSong').checked ? "Yes" : "No";
 
-  <script>
-    let recordCounter = 1;
+            // テーブルに新しい行を追加
+            const table = document.getElementById('recentRecords').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.insertCell(0).textContent = recordCounter;
+            newRow.insertCell(1).textContent = difficulty;
+            newRow.insertCell(2).textContent = clearType;
+            newRow.insertCell(3).textContent = clearRank;
+            newRow.insertCell(4).textContent = missCount;
+            newRow.insertCell(5).textContent = scratchSong;
 
-    function selectDifficulty(difficulty, element) {
-      // 既存の選択をクリア
-      const cells = document.querySelectorAll('.difficulty-table td');
-      cells.forEach(cell => cell.classList.remove('selected'));
-      
-      // 新しい選択をハイライト
-      element.classList.add('selected');
-      
-      // 選択された難易度をinputに設定
-      document.getElementById('selectedDifficulty').value = difficulty;
-    }
-    
-    function updateMissCountValue(value) {
-    document.getElementById("missCountValue").textContent = value;
-    document.getElementById("missCountSlider").value = value;
-    }
+            // リセット処理...
+            document.getElementById('playRecordForm').reset();
+            resetSelection();
 
-    function changeMissCount(change) {
-    var slider = document.getElementById("missCount");
-    var currentValue = parseInt(slider.value);
-    var newValue = currentValue + change;
-    if (newValue >= 0 && newValue <= 200) {
-        slider.value = newValue;
-        updateMissCountValue(newValue);
-    }
-}
-       
-    function addRecord() {
-      // フォームから値を取得
-      const difficulty = document.getElementById('selectedDifficulty').value;
-      const clearType = document.querySelector('input[name="clearType"]:checked').value;
-      const clearRank = document.querySelector('input[name="clearRank"]:checked').value;
-      const missCount = document.getElementById('missCount').value;
-      const scratchSong = document.getElementById('scratchSong').checked ? "Yes" : "No";
+            // フォームの値をリセット
+            document.getElementById('playRecordForm').reset();
+            // スライダーの値をリセット
+            document.getElementById('missCount').value = 0;
+            // ミス数の表示を明示的にリセット
+            document.getElementById('missCountValue').textContent = '0';
 
-      // テーブルに新しい行を追加
-      const table = document.getElementById('recentRecords').getElementsByTagName('tbody')[0];
-      const newRow = table.insertRow();
-      newRow.insertCell(0).appendChild(document.createTextNode(recordCounter));
-      newRow.insertCell(1).appendChild(document.createTextNode(difficulty));
-      newRow.insertCell(2).appendChild(document.createTextNode(clearType));
-      newRow.insertCell(3).appendChild(document.createTextNode(clearRank));
-      newRow.insertCell(4).appendChild(document.createTextNode(missCount));
-      newRow.insertCell(5).appendChild(document.createTextNode(scratchSong));
+            // 表示回数を更新
+            recordCounter++;
+            if (recordCounter > 10) {
+                recordCounter = 1;
+            }
+        }
 
-      // フォームの値をリセット
-      document.getElementById('playRecordForm').reset();
-      // スライダーの値をリセット
-      document.getElementById('missCount').value = 0;
-      // ミス数の表示を明示的にリセット
-      document.getElementById('missCountValue').textContent = '0';
-      
-      // 表示回数を更新
-      recordCounter++;
-      if (recordCounter > 10) {
-        recordCounter = 1;
-      }
-    }
-  </script>
+        // 選択状態をリセットする関数
+        function resetSelection() {
+            document.querySelectorAll('.selection-options button').forEach(button => {
+                button.classList.remove('selected');
+            });
+            document.getElementById('selectedDifficulty').value = ''; // 隠しフィールドもリセット
+            document.getElementById('selectedClearType').value = ''; // 隠しフィールドもリセット
+            document.getElementById('selectedClearRank').value = ''; // 隠しフィールドもリセット
+        }
+    </script>
 </body>
 </html>
