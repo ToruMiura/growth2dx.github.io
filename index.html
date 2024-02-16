@@ -31,6 +31,7 @@
             display: flex; /* Flexboxを有効化 */
             justify-content: space-around; /* 内容物を均等に配置 */
             margin: 5px 10px; /* 上下のマージンと、両端から10pxのマージン */
+            height: 60px; /* ボタンの高さ */
             gap: 0px; /* ボタン間のギャップ */
         }
 
@@ -64,11 +65,11 @@
         <!-- クリア種別のラジオボタン（横並び） -->
         <div class="selection-options" id="clearTypeOptions">
             <button type="button" onclick="selectOption('clearType', 'F', event)">Failed</button>
-            <button type="button" onclick="selectOption('clearType', 'AE', event)">AssistEasy</button>
+            <button type="button" onclick="selectOption('clearType', 'AE', event)">Assist<br>Easy</button>
             <button type="button" onclick="selectOption('clearType', 'E', event)">Easy</button>
             <button type="button" onclick="selectOption('clearType', 'C', event)">Clear</button>
             <button type="button" onclick="selectOption('clearType', 'H', event)">Hard</button>
-            <button type="button" onclick="selectOption('clearType', 'EH', event)">EXHard</button>
+            <button type="button" onclick="selectOption('clearType', 'EH', event)">EX<br>Hard</button>
         </div>
         <input type="hidden" id="selectedClearType" name="clearType">
         <br>
