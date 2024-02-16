@@ -103,7 +103,9 @@
 
     <!-- ミスカウント -->
     <label for="missCount">ミス数：</label>
-    <input type="number" id="missCount" name="missCount" min="0" max="500" step="1" value="0"><br><br>
+    <input type="range" id="missCountSlider" name="missCountSlider" min="0" max="150" value="0" oninput="updateMissCountValue(this.value);">
+    <span id="missCountValue">0</span>
+    <br><br>
 
     <!-- 皿曲の確認 -->
     <label for="scratchSong">スクラッチ曲：</label>
@@ -133,6 +135,10 @@
   <script>
     let recordCounter = 1;
 
+    function updateMissCountValue(value) {
+    document.getElementById("missCountValue").textContent = value;
+    }
+    
     function addRecord() {
       // フォームから値を取得
       const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
