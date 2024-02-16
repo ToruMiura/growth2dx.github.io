@@ -30,7 +30,7 @@
         .selection-options {
             display: flex; /* Flexboxを有効化 */
             justify-content: space-around; /* 内容物を均等に配置 */
-            margin: 20px 50px; /* 上下のマージンと、両端から50pxのマージン */
+            margin: 5px 10px; /* 上下のマージンと、両端から10pxのマージン */
             gap: 5px; /* ボタン間のギャップ */
         }
 
@@ -49,7 +49,7 @@
 <body>
     <h1>プレイ記録を追加</h1>
     <form id="playRecordForm" onsubmit="addRecord(); return false;">
-        <label>難易度：</label><br>
+        <label>難易度：</label>
         <div class="selection-options" id="difficultyOptions">
             <button type="button" onclick="selectOption('difficulty', '8', event)">8</button>
             <button type="button" onclick="selectOption('difficulty', '9', event)">9</button>
@@ -59,9 +59,8 @@
         </div>
         <input type="hidden" id="selectedDifficulty" name="difficulty">
         <br>
-        <br>
 
-        <label>クリア種別：</label><br>
+        <label>クリア種別：</label>
         <!-- クリア種別のラジオボタン（横並び） -->
         <div class="selection-options" id="clearTypeOptions">
             <button type="button" onclick="selectOption('clearType', 'F', event)">F</button>
@@ -73,9 +72,8 @@
         </div>
         <input type="hidden" id="selectedClearType" name="clearType">
         <br>
-        <br>
 
-        <label>クリアランク：</label><br>
+        <label>クリアランク：</label>
         <!-- クリアランクのラジオボタン（横並び） -->
         <div class="selection-options" id="clearRankOptions">
             <button type="button" onclick="selectOption('clearRank', 'C', event)">C</button>
@@ -89,7 +87,6 @@
         </div>
         <input type="hidden" id="selectedClearRank" name="clearRank">
         <br>
-        <br>
 
         <!-- ミスカウント -->
         <label for="missCount">ミス数: <span id="missCountValue"> 0 </span></label>
@@ -98,11 +95,14 @@
             <input type="range" id="missCount" name="missCount" min="0" max="200" value="0" style="flex-grow: 1;" oninput="updateMissCountValue(this.value);">
             <button type="button" onclick="changeMissCount(1)" style="margin-right: 20px;">+1</button>
         </div>
-        <br><br>
+        <br>
 
         <!-- 皿曲の確認 -->
         <label for="scratchSong">スクラッチ曲：</label>
-        <input type="checkbox" id="scratchSong" name="scratchSong" value="true"><br><br>
+        <input type="checkbox" id="scratchSong" name="scratchSong" value="true">
+        <br>
+        <br>
+        <br>
 
         <!-- 他の記録項目の入力フォーム -->
 
