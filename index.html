@@ -10,6 +10,22 @@
      display: inline-block;
      margin-right: 3px; /* ラジオボタン間の余白 */
    }
+   /* 直近10回分の記録テーブルのスタイル */
+   #recentRecords {
+     border-collapse: collapse; /* セルの境界線を一つにまとめる */
+     width: 100%; /* テーブルの幅を親要素に合わせる */
+     margin-top: 20px; /* テーブルの上の余白 */
+   }
+
+   #recentRecords th, #recentRecords td {
+     border: 1px solid #000; /* 黒の罫線 */
+     padding: 8px; /* セル内の余白 */
+     text-align: left; /* テキストを左揃えに */
+   }
+
+   #recentRecords th {
+     background-color: #f2f2f2; /* ヘッダーの背景色 */
+   } 
  </style>
 </head>
 <body>
