@@ -34,21 +34,28 @@
    .selected {
      background-color: #f2f2f2;
    }
+    /* 難易度の項目群を囲むdivのスタイル */
+    .difficulty-container {
+      max-width: calc(100% - 100px); /* 画面の幅から100px引いた値を最大幅とする */
+      margin: auto; /* 中央寄せ */
+  }
  </style>
 </head>
 <body>
   <h1>プレイ記録を追加</h1>
   <form id="playRecordForm" onsubmit="addRecord(); return false;">
     <label>難易度：</label><br>
-    <table class="difficulty-table">
-      <tr>
-        <td onclick="selectDifficulty('8', this)">8</td>
-        <td onclick="selectDifficulty('9', this)">9</td>
-        <td onclick="selectDifficulty('10', this)">10</td>
-        <td onclick="selectDifficulty('11', this)">11</td>
-        <td onclick="selectDifficulty('12', this)">12</td>
-      </tr>
-    </table>
+    <div class="difficulty-container">
+      <table class="difficulty-table">
+        <tr>
+          <td onclick="selectDifficulty('8', this)">8</td>
+          <td onclick="selectDifficulty('9', this)">9</td>
+          <td onclick="selectDifficulty('10', this)">10</td>
+          <td onclick="selectDifficulty('11', this)">11</td>
+          <td onclick="selectDifficulty('12', this)">12</td>
+        </tr>
+      </table>
+    </div>
     <input type="hidden" id="selectedDifficulty" name="difficulty">
     <br>
     <br>
@@ -170,7 +177,7 @@
        
     function addRecord() {
       // フォームから値を取得
-      const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+      const difficulty = document.getElementById('selectedDifficulty').value;
       const clearType = document.querySelector('input[name="clearType"]:checked').value;
       const clearRank = document.querySelector('input[name="clearRank"]:checked').value;
       const missCount = document.getElementById('missCount').value;
