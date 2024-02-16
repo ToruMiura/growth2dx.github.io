@@ -102,7 +102,7 @@
     <br>
 
     <!-- ミスカウント -->
-    <label for="missCount">ミス数: <span id="missCountValue" value="0"> 0 </span></label>
+    <label for="missCount">ミス数: <span id="missCountValue"> 0 </span></label>
     <div style="display: flex; align-items: center; margin-top: 10px; gap: 40px;">
       <button type="button" onclick="changeMissCount(-1)" style="margin-left: 20px;">−1</button>
       <input type="range" id="missCount" name="missCount" min="0" max="200" value="0" style="flex-grow: 1;" oninput="updateMissCountValue(this.value);">
@@ -139,8 +139,8 @@
     let recordCounter = 1;
 
     function updateMissCountValue(value) {
-    document.getElementById("missCountValue").textContent = value;
-    document.getElementById("missCountSlider").value = value;
+    document.getElementById('missCount').addEventListener('input', function() {
+    document.getElementById('missCountValue').textContent = this.value;
     }
 
     function changeMissCount(change) {
@@ -173,7 +173,11 @@
 
       // フォームの値をリセット
       document.getElementById('playRecordForm').reset();
-
+      // スライダーの値をリセット
+      document.getElementById('missCountSlider').value = 0;
+      // ミス数の表示を明示的にリセット
+      document.getElementById('missCountValue').textContent = '0';
+      
       // 表示回数を更新
       recordCounter++;
       if (recordCounter > 10) {
