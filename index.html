@@ -103,7 +103,7 @@
 
     <!-- ミスカウント -->
     <label for="missCount">ミス数: <span id="missCountValue">0</span></label>
-    <div style="display: flex; align-items: center; margin-top: 10px; gap: 50px;">
+    <div style="display: flex; align-items: center; margin-top: 10px; gap: 40px;">
       <button type="button" onclick="changeMissCount(-1)" style="margin-left: 20px;">−1</button>
       <input type="range" id="missCount" name="missCount" min="0" max="200" value="0" style="flex-grow: 1;" oninput="updateMissCountValue(this.value);">
       <button type="button" onclick="changeMissCount(1)" style="margin-right: 20px;">+1</button>
@@ -173,6 +173,7 @@
 
       // フォームの値をリセット
       document.getElementById('playRecordForm').reset();
+      updateMissCountValue(0);
 
       // 表示回数を更新
       recordCounter++;
