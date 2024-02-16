@@ -139,8 +139,8 @@
     let recordCounter = 1;
 
     function updateMissCountValue(value) {
-    document.getElementById('missCount').addEventListener('input', function() {
-    document.getElementById('missCountValue').textContent = this.value;
+    document.getElementById("missCountValue").textContent = value;
+    document.getElementById("missCountSlider").value = value;
     }
 
     function changeMissCount(change) {
